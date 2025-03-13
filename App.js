@@ -1,11 +1,21 @@
+import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, Button, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, TouchableHighlight, Pressable } from 'react-native';
 
 
 const icon = require('./assets/favicon.png');
 
 
 export default function App() {
+  const [timesPressed, setTimesPressed] = useState(0);
+
+  let textLog = '';
+  if (timesPressed > 1) {
+    textLog = timesPressed + 'x onPress';
+  } else if (timesPressed > 0) {
+    textLog = 'onPress';
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar style="light" /> {/* Barra SUPERIOR: (bateria, hora) - light */} 
@@ -36,7 +46,28 @@ export default function App() {
         onPress={() => alert('I am a custom button!')}    
         >
           <Text>Custom button</Text>
-        </TouchableHighlight>  
+        </TouchableHighlight>
+      
+      {/* Best way - BTN  */}
+      <Pressable
+          onPress={() => {
+            setTimesPressed(current => current + 1);
+          }}
+          style={({pressed}) => [
+            {
+              backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white',
+              fontSize: pressed ? 30 : 20
+            },
+            styles.wrapperCustom,
+          ]}>
+          {({pressed}) => (
+            <Text style={styles.text}>{pressed ? 'Pressed!' : 'Press Me'}</Text>
+          )}
+        </Pressable>
+        <View style={{backgroundColor: 'yellow', marginTop: 10}}>
+          <Text testID="pressable_press_console">{textLog}</Text>
+        </View>
+
     </View>
   );
 }
@@ -44,7 +75,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: '#d9d9d9',
     alignItems: 'center',
     justifyContent: 'center',
   },

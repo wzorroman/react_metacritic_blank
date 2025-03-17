@@ -6,5 +6,8 @@
 ## instalar dependencias web
     $ npx expo install react-dom react-native-web @expo/metro-runtime
 
+## Añadir el linter (LINT)
+    $ npx expo lint
+
 ## Run project
     $ npm start

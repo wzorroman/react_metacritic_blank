@@ -9,5 +9,10 @@
 ## Añadir el linter (LINT)
     $ npx expo lint
 
+## Añadir el prettier (LINT)
+    $ npx expo install -- --save-dev prettier eslint-config-prettier eslint-plugin-prettier
+    - Agregar la extension al VScode: 
+        * ESLint, Prettier - Code formatter
+
 ## Run project
     $ npm start

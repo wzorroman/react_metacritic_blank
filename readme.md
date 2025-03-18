@@ -8,6 +8,7 @@
 
 ## instalar safe areaContext ReactNative
     $ npx expo install react-native-safe-area-context
+    $ npx expo install react-native-svg
 
 ## Añadir el linter (LINT)
     $ npx expo lint

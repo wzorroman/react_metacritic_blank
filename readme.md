@@ -6,6 +6,9 @@
 ## instalar dependencias web
     $ npx expo install react-dom react-native-web @expo/metro-runtime
 
+## instalar safe areaContext ReactNative
+    $ npx expo install react-native-safe-area-context
+
 ## Añadir el linter (LINT)
     $ npx expo lint
 

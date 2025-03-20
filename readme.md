@@ -20,4 +20,13 @@
         * ESLint, Prettier - Code formatter
 
 ## Run project
-    $ npm start
+    $ npm start 
+
+
+---
+# Notas locales
+- Usar 10.0.2.2 para emuladores de Android
+    Si estás usando un emulador de Android, reemplaza localhost con *10.0.2.2*, que es un alias para acceder al servidor local desde el emulador:
+        
+        *freeToGames.js*
+        const LATEST_GAMES = "http://10.0.2.2:3000/api/games";

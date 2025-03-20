@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { FlatList, View, ActivityIndicator, ScrollView, Platform } from "react-native";
+import { FlatList, View, ActivityIndicator, ScrollView, Platform, StyleSheet } from "react-native";
 import { getLatestGamesFree } from "../lib/freeToGame";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { GameCard } from "./GameCard";
+import { AnimatedGameCard, GameCard } from "./GameCard";
 import { Logo } from "./Logo";
 
 export function Main() {
@@ -14,6 +14,8 @@ export function Main() {
   useEffect(() => {
     getLatestGamesFree().then((games) => {
       setGames(games);
+    }).catch((e) => {
+      console.error('Error cargando juegos:', e);
     });
   }, []);
 
@@ -21,8 +23,10 @@ export function Main() {
   const renderList = () => {
     if (Platform.OS === "web") {
       // Usar ScrollView o un div para web
+      console.log("Using Web");
       return (
-        <ScrollView style={{ height: "94vh" }}>
+        // <ScrollView style={{ height: "94vh" }}>
+        <ScrollView style={styles.webContainer}>
           {games.map((game) => (
             <GameCard key={game.id} game={game} />
           ))}
@@ -30,13 +34,19 @@ export function Main() {
       );
     } else {
       // Usar FlatList para móvil (Android/iOS)
+      console.log("Using Mobile");
       return (
-        <FlatList
-          data={games}
-          keyExtractor={(game) => game.id.toString()}
-          renderItem={({ item }) => <GameCard game={item} />}
-          contentContainerStyle={{ flexGrow: 2 }}
-        />
+        // <View style={{ flex: 1, backgroundColor: "#333" }}>
+        <View>
+          <FlatList
+            data={games}
+            contentContainerStyle={{ flexGrow: 2 }}
+            keyExtractor={(game) => game.id.toString()}
+            renderItem={({ item, index }) => (
+              <AnimatedGameCard game={item} index={index} />
+            )}
+          />
+        </View>
       );
     }
   };
@@ -54,3 +64,17 @@ export function Main() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  webContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    //justifyContent: "space-between",
+    //paddingHorizontal: "2%",
+    height: "94vh",
+  },
+  mobileContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+  },
+});

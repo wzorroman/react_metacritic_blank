@@ -8,7 +8,7 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["top"]}>
-        <View style={styles.container}>
+        <View style={styles.emptyDiv}>
           <StatusBar style="light" />
           <Main />
         </View>
@@ -19,10 +19,11 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#d5d5d5",
+    flex: 4,
+    //backgroundColor: "#dcdcdc",
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 12,
   },
+  emptyDiv: {},
 });
